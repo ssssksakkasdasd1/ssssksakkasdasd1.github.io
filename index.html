@@ -3,450 +3,1038 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Triotor | CryonX — Профессиональная разработка Telegram и Discord ботов, веб-сайтов</title>
-    <meta name="description" content="Разработка Telegram и Discord ботов, веб-сайтов и панелей управления под ключ. 5+ лет опыта, 50+ завершённых проектов.">
-    <meta name="keywords" content="Telegram бот, Discord бот, разработка сайтов, веб-разработка, фриланс, панель управления, CryonX, Triotor">
-    <meta name="author" content="Triotor | CryonX">
-    <link rel="icon" href="imgs/avatar.png" type="image/png">
-    <meta property="og:title" content="Triotor | CryonX — Профессиональная разработка">
-    <meta property="og:description" content="Разработка Telegram и Discord ботов, веб-сайтов и панелей управления под ключ.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://triotor.ru">
-    <meta property="og:image" content="https://triotor.ru/avatar.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Triotor | CryonX — Профессиональная разработка">
-    <meta name="twitter:description" content="Разработка Telegram и Discord ботов, веб-сайтов и панелей управления под ключ.">
-    <meta name="theme-color" content="#8B7355">
+    <title>CryonX — Triotor // Krovonik</title>
+    <meta name="description" content="Fullstack dev, дизайнер, создатель контента. Сайты, боты, проекты под ключ.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #0A0908;
+            --bg2: #110F0D;
+            --bg3: #181411;
+            --cream: #F0E6D3;
+            --cream2: #C9B89A;
+            --cream3: #8A7A65;
+            --gold: #C9A96E;
+            --gold2: #E8C99A;
+            --red: #C0392B;
+            --red2: #E74C3C;
+            --border: rgba(201, 169, 110, 0.12);
+            --border2: rgba(201, 169, 110, 0.25);
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #1A1714; color: #E8DFD3; overflow-x: hidden; }
-        h1, h2, h3, .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(180deg); } }
-        @keyframes floatSlow { 0%, 100% { transform: translateY(0) scale(1); } 50% { transform: translateY(-30px) scale(1.05); } }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes shine { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-        
-        .animate-float { animation: float 8s ease-in-out infinite; }
-        .animate-float-slow { animation: floatSlow 12s ease-in-out infinite; }
-        .animate-pulse { animation: pulse 3s ease-in-out infinite; }
-        .animate-fade-in-up { animation: fadeInUp 0.8s ease-out forwards; }
-        .animate-fade-in { animation: fadeIn 0.8s ease-out forwards; }
-        .shine-text { 
-            background: linear-gradient(90deg, #D4A574 0%, #FFE8C2 25%, #D4A574 50%, #FFE8C2 75%, #D4A574 100%);
-            background-size: 200% auto;
-            background-clip: text;
-            -webkit-background-clip: text;
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--bg);
+            color: var(--cream);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* CURSOR */
+        .cursor {
+            width: 10px; height: 10px;
+            background: var(--gold);
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+            mix-blend-mode: difference;
+        }
+        .cursor-ring {
+            width: 36px; height: 36px;
+            border: 1px solid var(--gold);
+            border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: transform 0.15s ease, width 0.3s, height 0.3s, opacity 0.3s;
+            opacity: 0.5;
+        }
+        body:hover .cursor-ring { opacity: 1; }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+        /* NOISE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 1; opacity: 0.4;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 24px 48px;
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid transparent;
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            background: rgba(10, 9, 8, 0.9);
+            backdrop-filter: blur(20px);
+            border-color: var(--border);
+        }
+        .nav-logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 13px;
+            color: var(--gold);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .nav-logo span { color: var(--cream3); }
+        .nav-links {
+            display: flex; gap: 40px; list-style: none;
+        }
+        .nav-links a {
+            color: var(--cream3);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute; bottom: -4px; left: 0; right: 0;
+            height: 1px; background: var(--gold);
+            transform: scaleX(0); transition: transform 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold2); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-rows: 1fr auto;
+            padding: 0 48px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(100px, 18vw, 280px);
+            font-weight: 800;
             color: transparent;
-            animation: shine 4s linear infinite;
+            -webkit-text-stroke: 1px rgba(201, 169, 110, 0.06);
+            white-space: nowrap;
+            letter-spacing: -0.04em;
+            pointer-events: none;
+            user-select: none;
         }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #8B7355 0%, #6B5A45 100%);
-            color: #F5F1EB;
-            padding: 18px 40px;
-            border-radius: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 32px rgba(139, 115, 85, 0.25);
-            border: 2px solid rgba(212, 165, 116, 0.3);
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-top: 140px;
+            position: relative; z-index: 2;
+            max-width: 900px;
+        }
+
+        .hero-tag {
+            display: inline-flex; align-items: center; gap: 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--cream3);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 48px;
+        }
+        .hero-tag::before {
+            content: '';
+            width: 32px; height: 1px;
+            background: var(--gold);
+        }
+        .hero-tag-dot {
+            width: 6px; height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            animation: blink 2s ease-in-out infinite;
+        }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+        .hero-name {
+            font-size: clamp(52px, 9vw, 130px);
+            font-weight: 800;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin-bottom: 8px;
+        }
+        .hero-name .line1 { display: block; color: var(--cream); }
+        .hero-name .divider {
+            display: inline-block;
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-size: 0.5em;
+            color: var(--gold);
+            margin: 0 16px;
+            vertical-align: middle;
+        }
+        .hero-name .line2 {
+            display: block;
+            color: var(--cream2);
+        }
+
+        .hero-project {
+            font-family: 'Space Mono', monospace;
+            font-size: clamp(11px, 1.5vw, 14px);
+            color: var(--gold);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            margin-bottom: 48px;
+            margin-top: 20px;
+        }
+        .hero-project span {
+            color: var(--cream3);
+            margin: 0 16px;
+        }
+
+        .hero-desc {
+            font-size: clamp(15px, 1.8vw, 18px);
+            color: var(--cream3);
+            line-height: 1.7;
+            max-width: 520px;
+            margin-bottom: 64px;
+        }
+
+        .hero-cta {
+            display: flex; align-items: center; gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .btn-main {
+            display: inline-flex; align-items: center; gap: 12px;
+            background: var(--gold);
+            color: var(--bg);
+            text-decoration: none;
+            padding: 16px 32px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        .btn-primary:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(139, 115, 85, 0.4);
-            border-color: rgba(212, 165, 116, 0.5);
-            background: linear-gradient(135deg, #9C8363 0%, #7B6A55 100%);
+        .btn-main::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: var(--gold2);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
         }
-        .btn-primary:active { transform: translateY(-2px); }
-        
-        .card {
-            background: rgba(40, 36, 32, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(139, 115, 85, 0.15);
-            border-radius: 20px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .btn-main:hover::before { transform: translateX(0); }
+        .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(201,169,110,0.3); }
+        .btn-main span, .btn-main svg { position: relative; z-index: 1; }
+
+        .btn-ghost {
+            display: inline-flex; align-items: center; gap: 10px;
+            color: var(--cream3);
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            border-bottom: 1px solid var(--border2);
+            padding-bottom: 4px;
+        }
+        .btn-ghost:hover { color: var(--cream); border-color: var(--cream3); }
+
+        .hero-scroll {
+            padding: 32px 0;
+            display: flex; align-items: center; gap: 16px;
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--cream3);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            position: relative; z-index: 2;
+        }
+        .hero-scroll::before {
+            content: '';
+            width: 1px; height: 60px;
+            background: linear-gradient(to bottom, transparent, var(--gold));
+        }
+
+        /* MARQUEE */
+        .marquee-wrap {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
             overflow: hidden;
-            position: relative;
+            background: var(--bg2);
+            padding: 18px 0;
         }
-        .card::before {
+        .marquee-track {
+            display: flex; gap: 0;
+            animation: marquee 25s linear infinite;
+            white-space: nowrap;
+        }
+        .marquee-item {
+            display: inline-flex; align-items: center; gap: 32px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--cream3);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0 32px;
+        }
+        .marquee-dot {
+            width: 4px; height: 4px;
+            background: var(--gold);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+        /* SECTIONS */
+        section { position: relative; z-index: 2; }
+
+        .section-label {
+            display: flex; align-items: center; gap: 16px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--gold);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 64px;
+        }
+        .section-label::before {
+            content: attr(data-num);
+            color: var(--cream3);
+            opacity: 0.5;
+        }
+        .section-label::after {
+            content: '';
+            flex: 1; height: 1px;
+            background: var(--border);
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 120px 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .about-left { }
+        .about-title {
+            font-size: clamp(36px, 5vw, 72px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 40px;
+        }
+        .about-title em {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold);
+        }
+        .about-text {
+            font-size: 16px;
+            color: var(--cream3);
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .about-text strong { color: var(--cream2); font-weight: 600; }
+
+        .about-right { padding-top: 80px; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+            margin-bottom: 48px;
+        }
+        .stat-box {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            padding: 32px 28px;
+            transition: border-color 0.3s, background 0.3s;
+        }
+        .stat-box:hover { border-color: var(--border2); background: var(--bg3); }
+        .stat-num {
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--gold);
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--cream3);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .skills-tags {
+            display: flex; flex-wrap: wrap; gap: 8px;
+        }
+        .tag {
+            background: transparent;
+            border: 1px solid var(--border2);
+            color: var(--cream3);
+            padding: 8px 16px;
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: all 0.3s;
+        }
+        .tag:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,169,110,0.05); }
+
+        /* SERVICES */
+        .services {
+            padding: 120px 48px;
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+        .service-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 48px 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            group: true;
+        }
+        .service-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, rgba(139, 115, 85, 0.1), transparent 40%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
+            top: 0; left: 0;
+            width: 100%; height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
         }
-        .card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-            border-color: rgba(139, 115, 85, 0.3);
+        .service-card:hover { border-color: var(--border2); background: var(--bg2); }
+        .service-card:hover::before { transform: scaleX(1); }
+
+        .service-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--cream3);
+            letter-spacing: 0.2em;
+            margin-bottom: 32px;
+            opacity: 0.5;
         }
-        .card:hover::before { opacity: 1; }
-        
-        .card-icon {
-            background: linear-gradient(135deg, rgba(40, 36, 32, 0.9), rgba(60, 52, 45, 0.9));
-            border-radius: 16px;
-            padding: 22px;
-            display: inline-flex;
-            border: 1px solid rgba(139, 115, 85, 0.2);
+        .service-icon {
+            width: 48px; height: 48px;
+            margin-bottom: 24px;
+            color: var(--gold);
         }
-        
-        .stat-number { 
-            font-size: 3.75rem;
-            background: linear-gradient(135deg, #D4A574 0%, #8B7355 100%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            line-height: 1;
-            text-shadow: 0 4px 20px rgba(212, 165, 116, 0.3);
+        .service-name {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
         }
-        
-        .avatar-container {
+        .service-desc {
+            font-size: 14px;
+            color: var(--cream3);
+            line-height: 1.7;
+        }
+        .service-tags {
+            margin-top: 32px;
+            display: flex; flex-wrap: wrap; gap: 6px;
+        }
+        .service-tag {
+            background: rgba(201,169,110,0.06);
+            color: var(--gold);
+            padding: 4px 10px;
+            font-family: 'Space Mono', monospace;
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        /* CHANNELS */
+        .channels {
+            padding: 120px 48px;
+        }
+        .channels-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .channel-card {
+            background: var(--bg2);
+            border: 1px solid var(--border);
+            padding: 40px;
             position: relative;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
             overflow: hidden;
-            border: 4px solid rgba(139, 115, 85, 0.3);
-            box-shadow: 
-                0 0 60px rgba(212, 165, 116, 0.3),
-                0 0 100px rgba(212, 165, 116, 0.1);
+            transition: all 0.4s ease;
+            text-decoration: none;
+            display: block;
         }
-        .avatar-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-        .avatar-container:hover .avatar-image {
-            transform: scale(1.1);
-        }
-        .avatar-glow {
+        .channel-card::after {
+            content: '→';
             position: absolute;
-            inset: -2px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, transparent, rgba(212, 165, 116, 0.4), transparent);
-            z-index: -1;
-            animation: rotate 4s linear infinite;
+            bottom: 40px; right: 40px;
+            font-size: 20px;
+            color: var(--gold);
+            opacity: 0;
+            transform: translate(-8px, 8px);
+            transition: all 0.3s ease;
         }
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .channel-card:hover { border-color: var(--border2); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
+        .channel-card:hover::after { opacity: 1; transform: translate(0, 0); }
+
+        .channel-emoji {
+            font-size: 32px;
+            margin-bottom: 20px;
+            display: block;
         }
-        
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(139, 115, 85, 0.4), transparent);
-            margin: 80px auto;
-            max-width: 800px;
+        .channel-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--cream);
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
         }
-        
-        ::selection { background: rgba(139, 115, 85, 0.4); color: #F5F1EB; }
-        ::-webkit-scrollbar { width: 12px; }
-        ::-webkit-scrollbar-track { background: #1A1714; }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(180deg, #8B7355 0%, #6B5A45 100%);
-            border-radius: 6px;
-            border: 3px solid #1A1714;
+        .channel-name em {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-weight: 400;
         }
-        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #9C8363 0%, #7B6A55 100%); }
-        
-        .opacity-0 { opacity: 0; }
-        .delay-100 { animation-delay: 0.1s; }
-        .delay-200 { animation-delay: 0.2s; }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-400 { animation-delay: 0.4s; }
-        .delay-500 { animation-delay: 0.5s; }
-        
-        .grid-pattern {
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(139, 115, 85, 0.05) 0%, transparent 55%),
-                radial-gradient(circle at 75% 75%, rgba(212, 165, 116, 0.03) 0%, transparent 55%);
+        .channel-desc {
+            font-size: 14px;
+            color: var(--cream3);
+            line-height: 1.6;
+            margin-bottom: 24px;
         }
+        .channel-type {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        /* WORK */
+        .work {
+            padding: 120px 48px;
+            background: var(--bg2);
+            border-top: 1px solid var(--border);
+        }
+        .work-list {
+            display: flex; flex-direction: column;
+        }
+        .work-item {
+            display: grid;
+            grid-template-columns: 60px 1fr auto auto;
+            gap: 32px;
+            align-items: center;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        .work-item:hover { background: rgba(201,169,110,0.02); }
+        .work-item:hover .work-title { color: var(--gold); }
+        .work-num {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--cream3);
+            opacity: 0.4;
+        }
+        .work-title {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            transition: color 0.3s;
+        }
+        .work-type {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--cream3);
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        .work-year {
+            font-family: 'Space Mono', monospace;
+            font-size: 11px;
+            color: var(--cream3);
+            opacity: 0.4;
+        }
+
+        /* CONTACT */
+        .contact {
+            padding: 140px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-bg {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(201,169,110,0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .contact-title {
+            font-size: clamp(48px, 8vw, 110px);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 0.9;
+            margin-bottom: 48px;
+            position: relative; z-index: 1;
+        }
+        .contact-title em {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+            font-weight: 400;
+            color: var(--gold);
+            display: block;
+        }
+        .contact-sub {
+            font-size: 16px;
+            color: var(--cream3);
+            max-width: 400px;
+            margin: 0 auto 48px;
+            line-height: 1.7;
+            position: relative; z-index: 1;
+        }
+        .contact-btns {
+            display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+            position: relative; z-index: 1;
+        }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 32px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .footer-logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 12px;
+            color: var(--cream3);
+            letter-spacing: 0.1em;
+        }
+        .footer-logo strong { color: var(--gold); }
+        .footer-right {
+            font-family: 'Space Mono', monospace;
+            font-size: 10px;
+            color: var(--cream3);
+            opacity: 0.4;
+            letter-spacing: 0.1em;
+        }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            nav { padding: 20px 24px; }
+            .nav-links { display: none; }
+            .hero { padding: 0 24px; }
+            .about { padding: 80px 24px; grid-template-columns: 1fr; gap: 48px; }
+            .about-right { padding-top: 0; }
+            .services { padding: 80px 24px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .channels { padding: 80px 24px; }
+            .channels-grid { grid-template-columns: 1fr; }
+            .work { padding: 80px 24px; }
+            .work-item { grid-template-columns: 1fr auto; }
+            .work-num, .work-year { display: none; }
+            .contact { padding: 100px 24px; }
+            footer { padding: 24px; flex-direction: column; gap: 16px; text-align: center; }
+        }
+
+        /* Selection */
+        ::selection { background: rgba(201,169,110,0.3); }
     </style>
 </head>
-<body class="antialiased grid-pattern">
-    <canvas id="particles-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+<body>
 
-    <main class="relative z-10">
-        <section class="min-h-screen flex flex-col justify-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto py-20">
-            <div class="flex flex-col lg:flex-row items-center lg:items-start gap-16">
-                <div class="lg:w-2/3">
-                    <div class="mb-8 animate-fade-in-up">
-                        <span class="inline-block px-5 py-2 rounded-full bg-[#282420]/80 backdrop-blur-sm text-sm font-medium text-[#D4A574] border border-[#8B7355]/30">
-                            FULLSTACK-РАЗРАБОТЧИК
-                        </span>
-                    </div>
-                    
-                    <h1 class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-                        <span class="shine-text animate-fade-in-up">TRIOTOR</span>
-                        <span class="block text-3xl sm:text-4xl md:text-5xl text-[#B8A99A] font-normal mt-4 animate-fade-in-up delay-100">| CRYONX</span>
-                    </h1>
-                    
-                    <h2 class="text-2xl sm:text-3xl md:text-4xl font-light mb-10 text-[#B8A99A] max-w-3xl animate-fade-in-up delay-200">
-                        Разработка проектов под ключ
-                    </h2>
-                    
-                    <p class="text-xl text-[#C7BCB0] mb-14 max-w-2xl leading-relaxed animate-fade-in-up delay-300">
-                        Telegram боты • Discord боты • Веб-сайты • Панели управления • API интеграции
-                    </p>
-                    
-                    <div class="animate-fade-in-up delay-400">
-                        <a href="https://t.me/triotor" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block">
-                            Обсудить проект →
-                        </a>
-                        <p class="mt-6 text-[#B8A99A] text-sm flex items-center gap-2">
-                            <span class="w-2 h-2 bg-[#D4A574] rounded-full animate-pulse"></span>
-                            Среднее время ответа: 15 минут
-                        </p>
-                    </div>
-                </div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+    <div class="nav-logo">CryonX <span>// Studio</span></div>
+    <ul class="nav-links">
+        <li><a href="#about">Обо мне</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#channels">Каналы</a></li>
+        <li><a href="#contact">Контакт</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+    <div class="hero-bg-text">CRYONX</div>
+    <div class="hero-content">
+        <div class="hero-tag">
+            <div class="hero-tag-dot"></div>
+            Открыт для проектов
+        </div>
+        <h1 class="hero-name">
+            <span class="line1">Triotor
+                <span class="divider">//</span>
+            </span>
+            <span class="line2">Krovonik</span>
+        </h1>
+        <p class="hero-project">
+            Fullstack Dev <span>·</span> Designer <span>·</span> Content Creator
+        </p>
+        <p class="hero-desc">
+            Создаю сайты, боты и цифровые проекты под ключ — от идеи до запуска. Веду три телеграм-канала. Работаю с душой.
+        </p>
+        <div class="hero-cta">
+            <a href="https://t.me/triotor" target="_blank" class="btn-main">
+                <span>Написать в Telegram</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </a>
+            <a href="#services" class="btn-ghost">Смотреть услуги →</a>
+        </div>
+    </div>
+    <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+    <div class="marquee-track">
+        <div class="marquee-item"><span class="marquee-dot"></span>Telegram Bots<span class="marquee-dot"></span>Discord Bots<span class="marquee-dot"></span>Web Development<span class="marquee-dot"></span>UI/UX Design<span class="marquee-dot"></span>Content Creation<span class="marquee-dot"></span>API Integration<span class="marquee-dot"></span>Fullstack Dev<span class="marquee-dot"></span>CryonX Studio</div>
+        <div class="marquee-item"><span class="marquee-dot"></span>Telegram Bots<span class="marquee-dot"></span>Discord Bots<span class="marquee-dot"></span>Web Development<span class="marquee-dot"></span>UI/UX Design<span class="marquee-dot"></span>Content Creation<span class="marquee-dot"></span>API Integration<span class="marquee-dot"></span>Fullstack Dev<span class="marquee-dot"></span>CryonX Studio</div>
+    </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+    <div class="about-left">
+        <div class="section-label" data-num="01">О себе</div>
+        <h2 class="about-title reveal">
+            Код, дизайн<br>
+            и <em>контент</em> —<br>
+            всё в одном.
+        </h2>
+        <p class="about-text reveal reveal-delay-1">
+            Я <strong>Triotor (CryonX)</strong> — фриланс-разработчик и дизайнер. Делаю проекты с нуля: от архитектуры и логики до визуала и деплоя.
+        </p>
+        <p class="about-text reveal reveal-delay-2">
+            Параллельно веду три Telegram-канала с разными аудиториями — <strong>лайф</strong>, <strong>арт</strong> и <strong>музыка</strong>. Понимаю, как делать контент, который реально цепляет.
+        </p>
+        <p class="about-text reveal reveal-delay-3">
+            Работаю быстро, без воды, всегда на связи. Твой успех = мой успех.
+        </p>
+    </div>
+    <div class="about-right">
+        <div class="stats-grid reveal">
+            <div class="stat-box">
+                <div class="stat-num">5+</div>
+                <div class="stat-label">Лет опыта</div>
             </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <h2 class="text-4xl sm:text-5xl font-bold mb-10 opacity-0">
-                        <span class="text-[#D4A574]">Обо мне</span>
-                    </h2>
-                    <div class="space-y-6 text-lg text-[#C7BCB0] leading-relaxed opacity-0">
-                        <p>
-                            Я — <span class="font-semibold text-[#D4A574]">Triotor (CryonX)</span>, фриланс-разработчик с фокусом на создании эффективных цифровых решений.
-                        </p>
-                        <p>
-                            Специализируюсь на разработке Telegram и Discord ботов, веб-приложений и систем автоматизации. Каждый проект — это индивидуальный подход, чистая архитектура и внимание к деталям.
-                        </p>
-                        <p>
-                            Работаю на результат: от идеи до запуска и технической поддержки. Ваш успех — моя главная цель.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-6">
-                    <div class="card p-8 text-center opacity-0">
-                        <div class="stat-number font-bold mb-3">5+</div>
-                        <div class="text-[#B8A99A] font-medium">Лет опыта</div>
-                    </div>
-                    <div class="card p-8 text-center opacity-0 delay-100">
-                        <div class="stat-number font-bold mb-3">50+</div>
-                        <div class="text-[#B8A99A] font-medium">Проектов</div>
-                    </div>
-                    <div class="card p-8 text-center opacity-0 delay-200">
-                        <div class="stat-number font-bold mb-3">100%</div>
-                        <div class="text-[#B8A99A] font-medium">Гарантия</div>
-                    </div>
-                    <div class="card p-8 text-center opacity-0 delay-300">
-                        <div class="stat-number font-bold mb-3">24/7</div>
-                        <div class="text-[#B8A99A] font-medium">Поддержка</div>
-                    </div>
-                </div>
+            <div class="stat-box">
+                <div class="stat-num">50+</div>
+                <div class="stat-label">Проектов</div>
             </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-            <h2 class="text-4xl sm:text-5xl font-bold mb-4 text-center opacity-0">
-                <span class="text-[#D4A574]">Направления работы</span>
-            </h2>
-            <p class="text-center text-[#B8A99A] text-lg mb-16 max-w-2xl mx-auto opacity-0">
-                Современные решения для автоматизации и цифровизации вашего бизнеса
-            </p>
-            
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="card p-8 opacity-0">
-                    <div class="card-icon mb-6">
-                        <svg class="w-10 h-10 text-[#D4A574]" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.14.121.099.155.233.171.326.016.093.036.305.02.469z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-[#D4A574]">Telegram боты</h3>
-                    <p class="text-[#C7BCB0] leading-relaxed">
-                        Автоматизация бизнес-процессов, обработка заказов, интеграция с платежными системами и CRM.
-                    </p>
-                </div>
-
-                <div class="card p-8 opacity-0 delay-100">
-                    <div class="card-icon mb-6">
-                        <svg class="w-10 h-10 text-[#D4A574]" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-[#D4A574]">Discord боты</h3>
-                    <p class="text-[#C7BCB0] leading-relaxed">
-                        Модерация, музыка, игры, кастомные команды и автоматизация управления сообществами.
-                    </p>
-                </div>
-
-                <div class="card p-8 opacity-0 delay-200">
-                    <div class="card-icon mb-6">
-                        <svg class="w-10 h-10 text-[#D4A574]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                        </svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4 text-[#D4A574]">Веб-сайты</h3>
-                    <p class="text-[#C7BCB0] leading-relaxed">
-                        Адаптивные сайты, лендинги, корпоративные порталы с современным дизайном и высокой скоростью.
-                    </p>
-                </div>
+            <div class="stat-box">
+                <div class="stat-num">3</div>
+                <div class="stat-label">ТГ-канала</div>
             </div>
-        </section>
-
-        <div class="section-divider"></div>
-
-        <section class="px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-center py-20">
-            <h2 class="text-4xl sm:text-5xl font-bold mb-10 opacity-0">
-                <span class="text-[#D4A574]">Начнём проект?</span>
-            </h2>
-            <p class="text-xl text-[#B8A99A] mb-12 leading-relaxed opacity-0 delay-100">
-                Расскажите о своей задаче, и я подготовлю индивидуальное решение с расчётом сроков и стоимости
-            </p>
-            <div class="opacity-0 delay-200">
-                <a href="https://t.me/triotor" target="_blank" rel="noopener noreferrer" class="btn-primary inline-block text-lg">
-                    Написать в Telegram →
-                </a>
-                <p class="mt-8 text-[#B8A99A] text-sm flex items-center justify-center gap-2">
-                    <span class="w-2 h-2 bg-[#D4A574] rounded-full animate-pulse"></span>
-                    Обычно отвечаю в течение 15 минут в рабочее время
-                </p>
-            </div>
-        </section>
-    </main>
-
-    <footer class="border-t border-[#282420] py-12 mt-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col sm:flex-row justify-between items-center gap-6">
-                <p class="text-[#B8A99A] text-sm sm:text-base">
-                    © 2025-2026 Triotor | CryonX. Все права защищены.
-                </p>
-                <a href="https://t.me/triotor" target="_blank" rel="noopener noreferrer" 
-                   class="text-[#B8A99A] hover:text-[#D4A574] transition-colors duration-300 flex items-center gap-3 font-medium group">
-                    <div class="p-2 rounded-lg bg-[#282420] group-hover:bg-[#8B7355]/20 transition-colors">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18 1.897-.962 6.502-1.359 8.627-.168.9-.5 1.201-.82 1.23-.697.064-1.226-.461-1.901-.903-1.056-.692-1.653-1.123-2.678-1.799-1.185-.781-.417-1.21.258-1.911.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.329-.913.489-1.302.481-.428-.008-1.252-.241-1.865-.44-.752-.244-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.831-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635.099-.002.321.023.465.14.121.099.155.233.171.326.016.093.036.305.02.469z"/>
-                        </svg>
-                    </div>
-                    <span>@triotor</span>
-                </a>
+            <div class="stat-box">
+                <div class="stat-num">∞</div>
+                <div class="stat-label">Идей</div>
             </div>
         </div>
-    </footer>
+        <div class="skills-tags reveal reveal-delay-2">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">React</span>
+            <span class="tag">Figma</span>
+            <span class="tag">PostgreSQL</span>
+            <span class="tag">Docker</span>
+            <span class="tag">aiogram</span>
+            <span class="tag">discord.py</span>
+            <span class="tag">REST API</span>
+            <span class="tag">Tailwind</span>
+        </div>
+    </div>
+</section>
 
-    <script>
-        class Particles {
-            constructor() {
-                this.canvas = document.getElementById('particles-canvas');
-                this.ctx = this.canvas.getContext('2d');
-                this.particles = [];
-                this.colors = [
-                    'rgba(212, 165, 116, 0.4)',
-                    'rgba(139, 115, 85, 0.3)',
-                    'rgba(184, 169, 154, 0.2)',
-                    'rgba(245, 241, 235, 0.1)'
-                ];
-                
-                this.init();
-                this.animate();
-                window.addEventListener('resize', () => this.init());
-            }
-            
-            init() {
-                this.width = window.innerWidth;
-                this.height = window.innerHeight;
-                this.canvas.width = this.width;
-                this.canvas.height = this.height;
-                this.particles = [];
-                
-                const particleCount = Math.min(150, Math.floor((this.width * this.height) / 8000));
-                
-                for (let i = 0; i < particleCount; i++) {
-                    this.particles.push({
-                        x: Math.random() * this.width,
-                        y: Math.random() * this.height,
-                        size: Math.random() * 3 + 0.5,
-                        speedX: (Math.random() - 0.5) * 0.5,
-                        speedY: (Math.random() - 0.5) * 0.5,
-                        color: this.colors[Math.floor(Math.random() * this.colors.length)],
-                        opacity: Math.random() * 0.5 + 0.1,
-                        wave: Math.random() * Math.PI * 2
-                    });
-                }
-            }
-            
-            animate() {
-                this.ctx.clearRect(0, 0, this.width, this.height);
-                
-                for (let particle of this.particles) {
-                    particle.wave += 0.02;
-                    particle.x += particle.speedX + Math.sin(particle.wave) * 0.1;
-                    particle.y += particle.speedY + Math.cos(particle.wave) * 0.1;
-                    
-                    if (particle.x > this.width) particle.x = 0;
-                    if (particle.x < 0) particle.x = this.width;
-                    if (particle.y > this.height) particle.y = 0;
-                    if (particle.y < 0) particle.y = this.height;
-                    
-                    this.ctx.beginPath();
-                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-                    this.ctx.fillStyle = particle.color.replace(')', `, ${particle.opacity})`);
-                    this.ctx.fill();
-                    
-                    for (let otherParticle of this.particles) {
-                        const dx = particle.x - otherParticle.x;
-                        const dy = particle.y - otherParticle.y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-                        
-                        if (distance < 100) {
-                            this.ctx.beginPath();
-                            this.ctx.strokeStyle = particle.color.replace(')', `, ${0.05 * (1 - distance/100)})`);
-                            this.ctx.lineWidth = 0.5;
-                            this.ctx.moveTo(particle.x, particle.y);
-                            this.ctx.lineTo(otherParticle.x, otherParticle.y);
-                            this.ctx.stroke();
-                        }
-                    }
-                }
-                
-                requestAnimationFrame(() => this.animate());
-            }
-        }
+<!-- SERVICES -->
+<section class="services" id="services">
+    <div class="section-label" data-num="02">Что делаю</div>
+    <div class="services-grid">
+        <div class="service-card reveal">
+            <div class="service-num">01</div>
+            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2z"/>
+                <path d="M8.5 12l2.5 2.5 5-5"/>
+            </svg>
+            <div class="service-name">Telegram боты</div>
+            <div class="service-desc">
+                Автоматизация бизнес-процессов, магазины, клиентские сервисы, интеграции с оплатой и CRM. Пишу на Python (aiogram) и Node.js.
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">aiogram</span>
+                <span class="service-tag">pytelegrambotapi</span>
+                <span class="service-tag">grammy</span>
+                <span class="service-tag">payments</span>
+            </div>
+        </div>
 
-        document.addEventListener('DOMContentLoaded', () => {
-            new Particles();
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.remove('opacity-0');
-                    }
-                });
-            }, { threshold: 0.1, rootMargin: '50px' });
+        <div class="service-card reveal reveal-delay-1">
+            <div class="service-num">02</div>
+            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37"/>
+                <circle cx="8" cy="15" r="2"/>
+                <circle cx="16" cy="15" r="2"/>
+            </svg>
+            <div class="service-name">Discord боты</div>
+            <div class="service-desc">
+                Модерация, система уровней, музыка, игровые механики, кастомные команды и полная автоматизация Discord-серверов.
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">discord.py</span>
+                <span class="service-tag">discord.js</span>
+                <span class="service-tag">slash commands</span>
+                <span class="service-tag">moderation</span>
+            </div>
+        </div>
 
-            document.querySelectorAll('.opacity-0').forEach(el => observer.observe(el));
-            
-            document.querySelectorAll('a[href^="http"]').forEach(link => {
-                link.setAttribute('rel', 'noopener noreferrer');
-            });
-            
-            const avatar = document.querySelector('.avatar-image');
-            if (avatar) {
-                avatar.addEventListener('load', () => {
-                    avatar.style.opacity = '1';
-                });
-            }
+        <div class="service-card reveal reveal-delay-2">
+            <div class="service-num">03</div>
+            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <path d="M3 9h18M9 21V9"/>
+            </svg>
+            <div class="service-name">Веб-сайты</div>
+            <div class="service-desc">
+                Лендинги, корпоративные порталы, SaaS-панели. Адаптивный дизайн, быстрый деплой, чистая архитектура.
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">React</span>
+                <span class="service-tag">Next.js</span>
+                <span class="service-tag">Tailwind</span>
+                <span class="service-tag">Figma</span>
+            </div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-1">
+            <div class="service-num">04</div>
+            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M4 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zM14 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V5zM4 15a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-4zM14 15a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-4z"/>
+            </svg>
+            <div class="service-name">Панели управления</div>
+            <div class="service-desc">
+                Дашборды, административные панели, аналитические интерфейсы с реалтайм-данными и удобным UX.
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">dashboard</span>
+                <span class="service-tag">admin panel</span>
+                <span class="service-tag">analytics</span>
+                <span class="service-tag">real-time</span>
+            </div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-2">
+            <div class="service-num">05</div>
+            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+            </svg>
+            <div class="service-name">API-интеграции</div>
+            <div class="service-desc">
+                Подключение платёжных систем, внешних сервисов, построение микросервисной архитектуры и REST/WebSocket API.
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">REST</span>
+                <span class="service-tag">WebSocket</span>
+                <span class="service-tag">payments</span>
+                <span class="service-tag">webhooks</span>
+            </div>
+        </div>
+
+        <div class="service-card reveal reveal-delay-3">
+            <div class="service-num">06</div>
+            <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            </svg>
+            <div class="service-name">Дизайн</div>
+            <div class="service-desc">
+                UI/UX дизайн в Figma — интерфейсы, аватарки, стикеры, брендинг. Делаю всё что связано с визуальным.
+            </div>
+            <div class="service-tags">
+                <span class="service-tag">Figma</span>
+                <span class="service-tag">UI/UX</span>
+                <span class="service-tag">branding</span>
+                <span class="service-tag">stickers</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CHANNELS -->
+<section class="channels" id="channels">
+    <div class="section-label" data-num="03">Мои каналы</div>
+    <div class="channels-grid">
+        <a href="https://t.me/triotor" target="_blank" class="channel-card reveal">
+            <span class="channel-emoji">📡</span>
+            <div class="channel-name">Triotor</div>
+            <div class="channel-desc">Лайф-канал. Рассказываю что делаю, показываю проекты, делюсь мыслями без фильтров.</div>
+            <div class="channel-type">LIVE · @triotor</div>
+        </a>
+        <a href="#" target="_blank" class="channel-card reveal reveal-delay-1">
+            <span class="channel-emoji">🎨</span>
+            <div class="channel-name"><em>art pack hub</em> ☾</div>
+            <div class="channel-desc">Аватарки, стикеры для Telegram, арт-паки и всё визуальное. Эстетика без компромиссов.</div>
+            <div class="channel-type">ART · design & stickers</div>
+        </a>
+        <a href="#" target="_blank" class="channel-card reveal reveal-delay-2">
+            <span class="channel-emoji">🖤</span>
+            <div class="channel-name"><em>listen paradise</em> ✧˖°</div>
+            <div class="channel-desc">Плейлисты, музыкальные находки, атмосфера. Музыка для тех кто чувствует.</div>
+            <div class="channel-type">MUSIC · playlists & vibes</div>
+        </a>
+    </div>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+    <div class="section-label" data-num="04">Что делал</div>
+    <div class="work-list">
+        <div class="work-item reveal">
+            <div class="work-num">01</div>
+            <div class="work-title">Telegram-магазин с оплатой</div>
+            <div class="work-type">Bot / E-commerce</div>
+            <div class="work-year">2024</div>
+        </div>
+        <div class="work-item reveal reveal-delay-1">
+            <div class="work-num">02</div>
+            <div class="work-title">Discord-бот для игрового сервера</div>
+            <div class="work-type">Bot / Gaming</div>
+            <div class="work-year">2024</div>
+        </div>
+        <div class="work-item reveal reveal-delay-2">
+            <div class="work-num">03</div>
+            <div class="work-title">SaaS-панель аналитики</div>
+            <div class="work-type">Web / Dashboard</div>
+            <div class="work-year">2024</div>
+        </div>
+        <div class="work-item reveal reveal-delay-3">
+            <div class="work-num">04</div>
+            <div class="work-title">Корпоративный лендинг</div>
+            <div class="work-type">Web / Landing</div>
+            <div class="work-year">2023</div>
+        </div>
+        <div class="work-item reveal">
+            <div class="work-num">05</div>
+            <div class="work-title">Бот для автоматизации HR</div>
+            <div class="work-type">Bot / Automation</div>
+            <div class="work-year">2023</div>
+        </div>
+        <div class="work-item reveal reveal-delay-1">
+            <div class="work-num">06</div>
+            <div class="work-title">Арт-паки и стикер-паки</div>
+            <div class="work-type">Design / Art</div>
+            <div class="work-year">2023 — ∞</div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+    <div class="contact-bg"></div>
+    <div class="section-label" data-num="05" style="justify-content:center; margin-bottom: 48px;">Контакт</div>
+    <h2 class="contact-title reveal">
+        Есть проект?
+        <em>Напишем.</em>
+    </h2>
+    <p class="contact-sub reveal reveal-delay-1">
+        Расскажи что нужно — отвечу быстро, без лишней воды, с конкретным предложением.
+    </p>
+    <div class="contact-btns reveal reveal-delay-2">
+        <a href="https://t.me/triotor" target="_blank" class="btn-main">
+            <span>Написать в Telegram</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+    <p style="margin-top:24px; font-family:'Space Mono',monospace; font-size:11px; color:var(--cream3); letter-spacing:0.1em; position:relative;z-index:1;">
+        Среднее время ответа — 15 минут
+    </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo"><strong>CryonX</strong> // Triotor × Krovonik</div>
+    <div class="footer-right">© 2025–2026 All rights reserved</div>
+</footer>
+
+<script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+    function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing); }
+    animRing();
+    document.querySelectorAll('a, button').forEach(el => {
+        el.addEventListener('mouseenter', () => { cursor.style.width = '16px'; cursor.style.height = '16px'; ring.style.width = '56px'; ring.style.height = '56px'; });
+        el.addEventListener('mouseleave', () => { cursor.style.width = '10px'; cursor.style.height = '10px'; ring.style.width = '36px'; ring.style.height = '36px'; });
+    });
+
+    // Nav scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
+
+    // Reveal
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
         });
-    </script>
+    });
+</script>
 </body>
 </html>
